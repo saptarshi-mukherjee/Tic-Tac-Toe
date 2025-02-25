@@ -44,6 +44,35 @@ public class Game {
         current_player_index=(++current_player_index%n);
     }
 
+    public void undo() {
+        Move move=moves.remove(moves.size()-1);
+        int row=move.getCell().getX();
+        int col=move.getCell().getY();
+        if(current_player_index==0)
+            current_player_index=players.size()-1;
+        else
+            current_player_index--;
+        board.getGrid().get(row).get(col).setPlayer(null);
+    }
+
+    public void replay() {
+        int row=-1, col=-1;
+        Player player=null;
+        board=new Board(players.size()+1);
+        board.print();
+        System.out.println();
+        System.out.println();
+        for(Move move : moves) {
+            row=move.getCell().getX();
+            col=move.getCell().getY();
+            player= move.getPlayer();
+            board.getGrid().get(row).get(col).setPlayer(player);
+            board.print();
+            System.out.println();
+            System.out.println();
+        }
+    }
+
     public static class GameBuilder {
         List<Player> players;
 

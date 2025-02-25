@@ -24,11 +24,17 @@ public class TicTacToe {
         }
         GameController controller=new GameController();
         Game game=controller.createGame(players);
-        while(controller.getGameStatus(game)==GameStatus.IN_PROGRESS) {
-            controller.printBoard(game);
-            controller.makeMove(game);
-        }
         controller.printBoard(game);
+        while(controller.getGameStatus(game)==GameStatus.IN_PROGRESS) {
+          controller.makeMove(game);
+          controller.printBoard(game);
+          System.out.println("Do you want to undo? (Y/N)");
+          if(sc.next().charAt(0)=='Y') {
+              controller.undo(game);
+              controller.printBoard(game);
+          }
+        }
+        controller.replay(game);
         System.out.println("Game ended");
     }
 }
