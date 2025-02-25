@@ -1,5 +1,6 @@
 package Models;
 
+import Strategies.Winner.LargeBoardStrategy;
 import Strategies.Winner.SmallBoardStrategy;
 import Strategies.Winner.WinningStrategy;
 
@@ -21,7 +22,10 @@ public class Game {
         this.moves=new ArrayList<>();
         this.current_player_index=0;
         this.status=GameStatus.IN_PROGRESS;
-        this.strategy=new SmallBoardStrategy();
+        if(n>10)
+            this.strategy=new LargeBoardStrategy(n+1);
+        else
+            this.strategy=new SmallBoardStrategy();
     }
 
     public void makeMove() {
