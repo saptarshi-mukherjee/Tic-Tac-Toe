@@ -48,6 +48,25 @@ public class LargeBoardStrategy implements WinningStrategy {
             return false;
     }
 
+    public void undoCell(Cell cell) {
+        int row=cell.getX();
+        int col= cell.getY();
+        Character symbol=cell.getPlayer().getSymbol();
+        removeFromMap(rows.get(row), symbol);
+        removeFromMap(columns.get(col), symbol);
+        if(row==col)
+            removeFromMap(diagonal,symbol);
+        if((row+col)==rows.size()-1)
+            removeFromMap(reverse_diagonal,symbol);
+    }
+
+    private void removeFromMap(HashMap<Character,Integer> map, Character symbol) {
+        if(map.get(symbol)>1)
+            map.put(symbol, map.get(symbol)-1);
+        else
+            map.remove(symbol);
+    }
+
 
     private void updateCell(Cell cell) {
         int row=cell.getX();

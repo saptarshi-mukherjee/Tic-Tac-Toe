@@ -23,6 +23,11 @@ public class SmallBoardStrategy implements WinningStrategy {
             return false;
     }
 
+    @Override
+    public void undoCell(Cell cell) {
+
+    }
+
     private boolean checkRow(Board board, int row, int col, Character symbol) {
         int n=board.getGrid().size();
         boolean flag=true;

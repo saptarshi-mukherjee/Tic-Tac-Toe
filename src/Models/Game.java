@@ -7,6 +7,7 @@ import Strategies.Winner.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Game {
     Board board;
@@ -15,6 +16,7 @@ public class Game {
     GameStatus status;
     Integer current_player_index;
     WinningStrategy strategy;
+//    Stack<Board> board_states;
 
     private Game(GameBuilder builder) {
         int n=builder.players.size();
@@ -24,6 +26,8 @@ public class Game {
         this.current_player_index=0;
         this.status=GameStatus.IN_PROGRESS;
         this.strategy= WinningStrategyFactory.getStrategy(n);
+//        this.board_states=new Stack<>();
+//        board_states.push(board);
     }
 
     public void makeMove() {
@@ -32,6 +36,7 @@ public class Game {
         Cell cell=player.makeMove(board);
         Move move=new Move(cell,player);
         moves.add(move);
+        //board_states.push(board);
         if(strategy.hasWon(board,cell)) {
             status=GameStatus.WIN;
             return;
@@ -51,6 +56,9 @@ public class Game {
             current_player_index=players.size()-1;
         else
             current_player_index--;
+//        board_states.pop();
+//        board=board_states.peek();
+        strategy.undoCell(move.getCell());
         board.getGrid().get(row).get(col).setPlayer(null);
     }
 
