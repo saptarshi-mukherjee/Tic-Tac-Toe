@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.Game;
 import Models.GameStatus;
+import Models.Move;
 import Models.Player;
 
 import java.util.List;
@@ -33,5 +34,13 @@ public class GameController {
 
     public void replay(Game game) {
         game.replay();
+    }
+
+    public Player getWinner(Game game) {
+        return game.getMoves().getLast().getPlayer();
+    }
+
+    public Move getLastMove(Game game) {
+        return game.getMoves().getLast();
     }
 }

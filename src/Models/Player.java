@@ -25,5 +25,5 @@ public abstract class Player {
         this.symbol = symbol;
     }
 
-    public abstract Cell makeMove(Board board, Player player);
+    public abstract Cell makeMove(Board board);
 }

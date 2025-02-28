@@ -8,12 +8,12 @@ public class HumnanPlayer extends Player {
     }
 
     @Override
-    public Cell makeMove(Board board, Player player) {
+    public Cell makeMove(Board board) {
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter row :-");
         int row=sc.nextInt();
         System.out.println("Enter column :-");
         int column=sc.nextInt();
-        return board.setPlayer(row, column, player);
+        return board.setPlayer(row, column, this);
     }
 }

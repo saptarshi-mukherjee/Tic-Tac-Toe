@@ -31,17 +31,14 @@ public class Game {
     public void makeMove() {
         int n=players.size();
         Player player=players.get(current_player_index);
-        Cell cell=player.makeMove(board,player);
-        //System.out.println(cell.getPlayer().getName()+" "+cell.getPlayer().getSymbol());
+        Cell cell=player.makeMove(board);
         Move move=new Move(cell,player);
         moves.add(move);
         if(strategy.hasWon(board,cell)) {
-            System.out.println(cell.getPlayer().getName()+" is the winner");
             status=GameStatus.WIN;
             return;
         }
         else if(moves.size()==((n+1)*(n+1))) {
-            System.out.println("Game is drawn");
             status=GameStatus.DRAW;
             return;
         }
